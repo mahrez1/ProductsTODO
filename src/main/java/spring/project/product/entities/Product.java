@@ -16,18 +16,21 @@ public class Product
 	String productName ;
 	int quantity ;
 	boolean available ;
+	private String imageUrl;
 	
 	
 	
 	public Product() {
 		super();
 	}
-	public Product(long iD, String productName, int quantity, boolean available) {
+	public Product(long iD, String productName, int quantity, boolean available, String imageUrl) {
 		super();
 		ID = iD;
 		this.productName = productName;
 		this.quantity = quantity;
 		this.available = available;
+        this.imageUrl = imageUrl;
+
 	}
 	public long getID() {
 		return ID;
@@ -53,6 +56,14 @@ public class Product
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
+	
+	public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 	
 
 }
