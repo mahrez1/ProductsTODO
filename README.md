@@ -14,4 +14,7 @@ Admin : full CRUD on products and users + SignIn, SignOut + create Manager
 Manager : ADD+EDIT on products +SHOW + SignIn, SignOut 
 User: SHOW + SignIn, SignOut and Register
 
-This teplate is going to be updated through out the duration of the project.....
+PS : Add product function stores product image in firebase folder under 
+the name products and the created URL is asigned to the imageUrl attribute in the Mysql data base 
+
+This template is going to be updated through out the duration of the project.....
