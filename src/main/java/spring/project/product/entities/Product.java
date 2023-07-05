@@ -23,9 +23,9 @@ public class Product
 	public Product() {
 		super();
 	}
-	public Product(long iD, String productName, int quantity, boolean available, String imageUrl) {
+	public Product(long ID, String productName, int quantity, boolean available, String imageUrl) {
 		super();
-		ID = iD;
+		this.ID = ID;
 		this.productName = productName;
 		this.quantity = quantity;
 		this.available = available;
@@ -35,8 +35,8 @@ public class Product
 	public long getID() {
 		return ID;
 	}
-	public void setID(long iD) {
-		ID = iD;
+	public void setID(long ID) {
+		this.ID = ID;
 	}
 	public String getProductName() {
 		return productName;

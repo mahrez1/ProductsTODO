@@ -1,6 +1,10 @@
 package spring.project.product.controller;
 
 import java.io.IOException;
+
+
+import org.springframework.http.MediaType;
+
 import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +32,13 @@ import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import com.google.gson.Gson;
 
+import org.springframework.http.MediaType;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import jakarta.servlet.annotation.MultipartConfig;
+@MultipartConfig
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/product")
@@ -51,16 +62,24 @@ public class ProductController {
 	@Autowired
 	ProductService productService ;
 	
-	@PostMapping("/addProduct")
+	@PostMapping(value = "/addProduct", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseBody
-	public void addProduct(@RequestPart("product") Product product,
-	                       @RequestPart("imageUrl") MultipartFile imageFile) {
+	public void addProduct(@RequestPart("product") String productJson,
+	                       @RequestPart("imageUrl") MultipartFile imageFile,
+	                       MultipartHttpServletRequest request) {
+	    Product product = new Gson().fromJson(productJson, Product.class);
+	    
 	    if (!imageFile.isEmpty()) {
 	        String imageUrl = uploadImageToFirebase(imageFile);
 	        product.setImageUrl(imageUrl);
 	    }
+	    
+	    // Process the files and save the product
+	    // Handle the product file if necessary
+	    
 	    productService.Addproduct(product);
 	}
+
 	
 	@GetMapping("/retrieve-all-products")
 	@ResponseBody
